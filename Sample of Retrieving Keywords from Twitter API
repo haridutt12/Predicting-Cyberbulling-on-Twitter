@@ -97,21 +97,6 @@ for t in search:
     print(clean_words)
 
 
-# In[71]:
-
-
-#another attempt at taking out emojis
-import re
-
-# http://stackoverflow.com/a/13752628/6762004
-RE_EMOJI = re.compile('[\U00010000-\U0010ffff]', flags=re.UNICODE)
-
-def strip_emoji(text):
-    return RE_EMOJI.sub(r'', text)
-
-print(strip_emoji('🙄🤔'))
-
-
 # In[76]:
 # sample "mean word/phrase" example: 
 
