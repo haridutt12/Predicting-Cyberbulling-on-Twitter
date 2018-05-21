@@ -37,6 +37,6 @@ Bullying (binary classification based on cross-validation of 5 members):
 
 Naive Bayes, Decision Tree, Logistic Regression, Support Vector Machine
 
-## Sample Tweets using a curse word:
+## Sample tweets of our methodology using "curse words":
 
 ![sample tweets](https://user-images.githubusercontent.com/39225674/40333318-e6dd4af2-5d25-11e8-9499-8d34216704d1.PNG)
