@@ -66,7 +66,7 @@ statuses = api.GetUserTimeline(screen_name="@realDonaldTrump", count=100)
 print([s.text for s in statuses])
 
 
-# In[50]:
+#In[50]:
 
 
 search = api.GetSearch("@realDonaldTrump", count=100)
@@ -84,8 +84,8 @@ for t in search:
     print(clean_words)
 
 
-# In[57]:
-# "curse word" example: 
+#In[57]:
+#"curse word" example: 
 
 
 search = api.GetSearch("fuck you", count=50)
@@ -158,7 +158,7 @@ for t in search:
 
 
 # In[76]:
-#sample "mean word/phrase" example: 
+# sample "mean word/phrase" example: 
 
 
 search = api.GetSearch("nobody cares about you", count=50) # Replace happy with your search
