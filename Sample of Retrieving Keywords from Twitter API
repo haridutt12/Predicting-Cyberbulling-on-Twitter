@@ -60,12 +60,6 @@ emoji_pattern = re.compile("["
                            "]+", flags=re.UNICODE)
 print(emoji_pattern)
 
-#testing with a username:
-
-statuses = api.GetUserTimeline(screen_name="@realDonaldTrump", count=100)
-print([s.text for s in statuses])
-
-
 #In[56]:
 #"curse word" example: 
 
@@ -116,27 +110,6 @@ def strip_emoji(text):
     return RE_EMOJI.sub(r'', text)
 
 print(strip_emoji('🙄🤔'))
-
-
-# In[75]:
-
-
-dataset = []
-search = api.GetSearch("you are an asshole", count=50) # Replace happy with your search
-for t in search:
-    tweets = t.text.lower()
-    tweets = re.sub(r"http\S+", "", tweets)
-    tweets = tweets.replace("…","")
-    tweets = tweets.strip()
-    strip_emoji(tweets)
-    sentences = sent_tokenize(tweets.replace('\n',' '))
-    clean_words = [word for word in sentences if word not in set(string.punctuation)]
-    characters_to_remove = ["''",'``','...']
-    clean_words = [word for word in clean_words if word not in set(characters_to_remove)]
-    characters_to_remove2 = [word for word in clean_words if any(letter in sentences for letter in '\\')]
-    clean_words = [word for word in clean_words if word not in set(characters_to_remove2)]
-
-    print(clean_words)
 
 
 # In[76]:
