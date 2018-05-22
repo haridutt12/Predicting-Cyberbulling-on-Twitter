@@ -1,11 +1,14 @@
 # Predicting-Cyberbulling-on-Twitter
-Using Python to detect cyber-bullying on Twitter based on categories and kinds of language used with at-risk tweets (group project)
+Using Python to detect cyber-bullying on Twitter based on categories and kinds of language used with at-risk tweets (INFO 368 project)
 
-## Data Source:
+## Additional credits to group members: 
+David Kimball, Islam Laib, Adam Soloski, and Sammy Jbara
+
+## Data source:
 
 Twitter API 
 
-## Main Libraries used:
+## Main libraries used:
 Python-Twitter, NLTK
 
 Bullying (binary classification based on cross-validation of 5 members):  
@@ -33,7 +36,7 @@ Bullying (binary classification based on cross-validation of 5 members):
 
 - "Mean Words" (idiot, loser etc.) 
 
-## Models Evaluated with n-grams (unigram, bigrams, trigrams, combination (n=3): 
+## Models evaluated with n-grams (unigram, bigrams, trigrams, combination (n=3): 
 
 Naive Bayes, Decision Tree, Logistic Regression, Support Vector Machine
 
