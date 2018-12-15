@@ -9,7 +9,7 @@ David Kimball, Islam Laib, Adam Soloski, and Sammy Jbara
 Twitter API 
 
 ## Main libraries used:
-Python-Twitter, NLTK
+Python-Twitter, NLTK, Pandas
 
 Bullying (binary classification based on cross-validation of 5 members):  
 
