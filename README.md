@@ -1,5 +1,5 @@
 # Predicting-Cyberbulling-on-Twitter
-Using Python to detect cyber-bullying on Twitter based on categories and kinds of language used with at-risk tweets (INFO 368 project)
+Goal: Using Python to detect cyber-bullying on Twitter based on categories and kinds of language used with at-risk tweets (INFO 368: Unstructured Analytics project)
 
 ## Additional credits to group members: 
 David Kimball, Islam Laib, Adam Soloski, and Sammy Jbara
