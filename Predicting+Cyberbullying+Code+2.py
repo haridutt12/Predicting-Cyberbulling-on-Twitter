@@ -1,9 +1,10 @@
 
 # coding: utf-8
+#Same modeling, slightly different code with similar results
 
 # In[1]:
 
-
+#Import libraries
 import pandas as pd
 import numpy as np
 from nltk.corpus import stopwords 
@@ -14,7 +15,7 @@ from nltk.stem import WordNetLemmatizer
 
 # In[2]:
 
-
+#import dataset
 import pandas as pd
 df1 = pd.read_csv("cleanprojectdataset.csv")
 
@@ -27,7 +28,7 @@ print(df1)
 
 # In[4]:
 
-
+#Create lists for tweets and label
 Tweet = []
 Labels = []
 
@@ -52,20 +53,20 @@ for row in df1["Tweet"]:
 
 # In[5]:
 
-
+#Combine lists
 combined = zip(Tweet, Labels)
 
 
 # In[6]:
 
-
+#Create bag of words
 def bag_of_words(words):
     return dict([(word, True) for word in words])
 
 
 # In[7]:
 
-
+#Create new list for modeling
 Final_Data = []
 for r, v in combined:
     bag_of_words(r)
@@ -82,9 +83,10 @@ print(len(Final_Data))
 
 # In[9]:
 
-
+#Split the data into training and test
 train_set, test_set = Final_Data[0:746], Final_Data[746:]
 
+#Naive Bayes for Unigramsm check accuracy
 import nltk
 import collections
 from nltk.metrics.scores import (accuracy, precision, recall, f_measure) 
@@ -106,7 +108,7 @@ print("Accuracy:",nltk.classify.accuracy(classifier, test_set))
 
 # In[10]:
 
-
+#Naive Bayes for Unigrams, Recall Measure
 nb_classifier = nltk.NaiveBayesClassifier.train(train_set)
 
 nbrefset = collections.defaultdict(set)
@@ -123,13 +125,13 @@ print("")
 
 # In[11]:
 
-
+#Find most informative features
 classifier.show_most_informative_features(n=10)
 
 
 # In[12]:
 
-
+#Decision Tree for Unigrams
 from nltk.classify import DecisionTreeClassifier
 
 dt_classifier = DecisionTreeClassifier.train(train_set, 
@@ -151,7 +153,7 @@ print("")
 
 # In[13]:
 
-
+#Logisitic Regression for Unigrams
 from nltk.classify import MaxentClassifier
 
 logit_classifier = MaxentClassifier.train(train_set, algorithm='gis', trace=0, max_iter=10, min_lldelta=0.5)
@@ -168,7 +170,7 @@ print("")
 
 # In[14]:
 
-
+#Support Vector Machine for Unigrams
 from nltk.classify import SklearnClassifier
 from sklearn.svm import SVC
 SVM_classifier = SklearnClassifier(SVC(), sparse=False).train(train_set)
@@ -178,13 +180,13 @@ for i, (feats, label) in enumerate(test_set):
     observed = SVM_classifier.classify(feats)
     testset[observed].add(i)
     
-print("UniigramSVM Recall")
+print("UnigramSVM Recall")
 print('Bullying recall:', recall(testset['Bullying'], refset['Bullying']))
 
 
 # In[15]:
 
-
+#Same thing with Bigrams
 from nltk import bigrams, trigrams
 from nltk.collocations import BigramCollocationFinder
 from nltk.metrics import BigramAssocMeasures
@@ -198,7 +200,7 @@ combined = zip(Tweet,Labels)
 
 # In[17]:
 
-
+#Bag of Words of Bigrams
 def bag_of_bigrams_words(words, score_fn=BigramAssocMeasures.chi_sq, n=200):
     bigram_finder = BigramCollocationFinder.from_words(words)  
     bigrams = bigram_finder.nbest(score_fn, n)  
@@ -229,7 +231,7 @@ import collections
 from nltk.metrics.scores import (accuracy, precision, recall, f_measure) 
 from nltk import metrics
 
-
+#Naive Bayes for Bigrams
 
 refsets = collections. defaultdict(set)
 testsets = collections.defaultdict(set)
@@ -243,7 +245,7 @@ for i, (feats, label) in enumerate(test_set):
     testsets[observed].add(i)
 
 
-print("Naive Bayes Performance with Unigrams ")    
+print("Naive Bayes Performance with Bigrams ")    
 print("Accuracy:",nltk.classify.accuracy(classifier, test_set))
 
 
@@ -263,7 +265,7 @@ print("")
 
 # In[22]:
 
-
+#Decision Tree for Bigrams
 from nltk.classify import DecisionTreeClassifier
 
 dt_classifier = DecisionTreeClassifier.train(train_set, 
@@ -285,7 +287,7 @@ print("")
 
 # In[23]:
 
-
+#Logistic Regression for Bigrams
 from nltk.classify import MaxentClassifier
 
 logit_classifier = MaxentClassifier.train(train_set, algorithm='gis', trace=0, max_iter=10, min_lldelta=0.5)
@@ -302,7 +304,7 @@ print("")
 
 # In[24]:
 
-
+#Support Vector Machine for Bigrams
 from nltk.classify import SklearnClassifier
 from sklearn.svm import SVC
 SVM_classifier = SklearnClassifier(SVC(), sparse=False).train(train_set)
@@ -324,7 +326,7 @@ combined = zip(Tweet,Labels)
 
 # In[26]:
 
-
+#Same thing with Trigrams
 from nltk import bigrams, trigrams
 from nltk.collocations import TrigramCollocationFinder
 from nltk.metrics import TrigramAssocMeasures
@@ -350,6 +352,7 @@ print(len(Final_Data3))
 
 train_set, test_set = Final_Data3[0:747], Final_Data3[747:]
 
+#Naive Bayes for Trigrams
 import nltk
 import collections
 from nltk.metrics.scores import (accuracy, precision, recall, f_measure) 
@@ -387,7 +390,7 @@ classifier.show_most_informative_features(n=10)
 
 # In[30]:
 
-
+#Decision Tree for Trigrams
 from nltk.classify import DecisionTreeClassifier
 
 dt_classifier = DecisionTreeClassifier.train(train_set, 
@@ -409,7 +412,7 @@ print("")
 
 # In[48]:
 
-
+#Logistic Regression for Trigrams
 from nltk.classify import MaxentClassifier
 
 logit_classifier = MaxentClassifier.train(train_set, algorithm='gis', trace=0, max_iter=10, min_lldelta=0.5)
@@ -425,7 +428,7 @@ print("")
 
 # In[31]:
 
-
+#Support Vector Machine for Trigrams
 from nltk.classify import SklearnClassifier
 from sklearn.svm import SVC
 SVM_classifier = SklearnClassifier(SVC(), sparse=False).train(train_set)
@@ -447,7 +450,9 @@ combined = zip(Tweet,Labels)
 
 # In[33]:
 
+#Combine both unigrams, bigrams, and trigrams
 
+# Import Bigram metrics - we will use these to identify the top 200 bigrams
 def bigrams_words(words, score_fn=BigramAssocMeasures.chi_sq,
 n=200):
     bigram_finder = BigramCollocationFinder.from_words(words)
@@ -456,7 +461,7 @@ n=200):
 
 from nltk.collocations import TrigramCollocationFinder
 
-# Import Bigram metrics - we will use these to identify the top 200 bigrams
+# Import Bigram metrics - we will use these to identify the top 200 trigrams 
 from nltk.metrics import TrigramAssocMeasures
 
 def trigrams_words(words, score_fn=TrigramAssocMeasures.chi_sq,
@@ -465,7 +470,7 @@ n=200):
     trigrams = trigram_finder.nbest(score_fn, n)
     return trigrams
 
-
+#bag of ngrams
 def bag_of_Ngrams_words(words):
     bigramBag = bigrams_words(words)
     
@@ -503,7 +508,7 @@ import nltk
 import collections
 from nltk.metrics.scores import (accuracy, precision, recall, f_measure) 
 from nltk import metrics
-
+#Naive Bayes for Ngrams
 
 refsets = collections. defaultdict(set)
 testsets = collections.defaultdict(set)
@@ -536,7 +541,7 @@ print('bullying recall:', recall(refsets['Bullying'], testsets['Bullying']))
 
 # In[37]:
 
-
+#Decision Tree for Ngrams
 from nltk.classify import DecisionTreeClassifier
 
 dt_classifier = DecisionTreeClassifier.train(train_set, 
@@ -558,7 +563,7 @@ print("")
 
 # In[38]:
 
-
+#Logistic Regression for Ngrams
 from nltk.classify import MaxentClassifier
 
 logit_classifier = MaxentClassifier.train(train_set, algorithm='gis', trace=0, max_iter=10, min_lldelta=0.5)
@@ -574,7 +579,7 @@ print("")
 
 # In[39]:
 
-
+#Support Vector Machine for Ngrams
 from nltk.classify import SklearnClassifier
 from sklearn.svm import SVC
 SVM_classifier = SklearnClassifier(SVC(), sparse=False).train(train_set)
